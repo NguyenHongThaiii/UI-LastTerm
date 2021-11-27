@@ -27,39 +27,38 @@ async function handelFilterChange(filterName, filterValue) {
   }
 }
 
-function handelClick() {
-  const agree = document.querySelector('[data-modal="agree"]');
-  let count = 0;
-  agree.addEventListener('click', async () => {
-    console.log('Remove');
-    count++;
-    console.log('count: ' + count);
-  });
-}
+// function handelClick() {
+//   const agree = document.querySelector('[data-modal="agree"]');
+//   let count = 0;
+//   agree.addEventListener('click', async () => {
+//     console.log('Remove');
+//     count++;
+//     console.log('count: ' + count);
+//   });
+// }
 
 function registerRemoveItem() {
   try {
     document.addEventListener('post-remove', async (event) => {
-      const agree = document.querySelector('[data-modal="agree"]');
-      const noAgree = document.querySelector('[data-modal="noAgree"]');
+      // const agree = document.querySelector('[data-modal="agree"]');
+      // const noAgree = document.querySelector('[data-modal="noAgree"]');
       const post = event.detail;
-      // if (window.confirm()) {
-      //   await postApi.remove(post.id);
-      //   await handelFilterChange();
-      //   toastify.success('Remove successfully');
-      // }
+      if (window.confirm()) {
+        await postApi.remove(post.id);
+        await handelFilterChange();
+        toastify.success('Remove successfully');
+      }
 
       // console.log('Post-remove', event.detail);
       // // Show modal
       showModal('modal');
       // // Choose option remove item
-      let count = 0;
-      agree.addEventListener('click', handelClick);
+
       // // Choose option cancel remove item
 
-      noAgree.addEventListener('click', () => {
-        agree.removeEventListener('click', handelClick);
-      });
+      // noAgree.addEventListener('click', () => {
+      //   agree.removeEventListener('click', handelClick);
+      // });
     });
   } catch (error) {
     console.log('Error remove item is: ', error.message);
